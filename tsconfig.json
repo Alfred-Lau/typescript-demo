@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    // implicitly has an 'any' type.
+    // "noImplicitAny": true,
+    // "noUnusedLocals": true,
+    "alwaysStrict": true,
+    "types": ["node"],
+    "lib": [
+      "esnext"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}
