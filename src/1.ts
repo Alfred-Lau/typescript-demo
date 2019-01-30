@@ -29,14 +29,14 @@ console.log(colorName)
 
 function warnUser(): void {
   console.log('no return')
-  
+
 }
 
 let num: number = undefined
 let num2: number = null
 
 function error(msg: string): never {
-  throw new Error(msg)  
+  throw new Error(msg)
 }
 
 /* 类型推断 */
@@ -63,7 +63,7 @@ console.log(first)
   ( { a, b } = { a: 'baz', b: 101 })
 
 console.log(a, b)
-  
+
 
 // 属性重命名:注意这里的冒号不是指示类型的，如果你想指定它的类型，仍然需要在其后写上完整的模式
 
@@ -82,7 +82,7 @@ console.log(c, d)
 
 
 
-/* 
+/*
 
 接口： 接口能够描述js里面丰富的类型
 
@@ -191,7 +191,7 @@ class Dog extends Animal {
 }
 
 interface NotOkay {
-  // [x: number]: Animal,  P135  
+  // [x: number]: Animal,  P135
   [x: string]: Dog
 }
 
@@ -205,10 +205,10 @@ interface IClock {
 class Clock implements IClock {
   currentTime: Date;
   constructor(h: number, m: number) {
-    
+
   }
   setTime(d: Date) {
-    
+
   }
 }
 
@@ -242,7 +242,7 @@ interface ICounter {
 
 function getCounter(): ICounter {
  let counter = <ICounter>function (start:number) {
-  } 
+  }
   counter.interval = 123
   counter.reset = function () { }
   return counter
@@ -255,7 +255,7 @@ myC(10)
 // 接口继承类
 
 
-/* 
+/*
 
 类：
 
@@ -313,8 +313,45 @@ class Animal2 {
 }
 
 class Snake extends Animal2 {
-  constructor(name:string) {
+  constructor(name: string) {
+    // 在构造函数里访问this的属性之前，我们一定要调用super()
     super(name)
   }
-  move(){}
+  move(distanceInMeters: number = 5) {
+    console.info('Slithering...');
+    super.move(distanceInMeters)
+  }
 }
+
+class Horse extends Animal2 {
+  constructor(name: string) {
+    super(name)
+  }
+  move(distanceInMeters: number = 45) {
+    console.info('Galloping');
+    super.move(distanceInMeters)
+  }
+}
+
+let sam = new Snake('Sammy the Python')
+let tom: Animal2 = new Horse('tommy the palomino')
+sam.move()
+tom.move(34)
+
+// 共有，私有和受保护的修饰符：默认为public，还有private， protected
+
+class Animal3 {
+  private age: number;
+  public name: string;
+  public constructor(theName:string) {
+    this.name = theName;
+  }
+  /**
+   * move
+   */
+  public move(distanceInMeters : number = 0) {
+    console.log(`${this.name} moved ${distanceInMeters}m.`);
+  }
+}
+
+// new Animal3('Cat').age //无法访问

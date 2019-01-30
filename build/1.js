@@ -202,8 +202,44 @@ var Animal2 = /** @class */ (function () {
 var Snake = /** @class */ (function (_super) {
     __extends(Snake, _super);
     function Snake(name) {
+        // 在构造函数里访问this的属性之前，我们一定要调用super()
         return _super.call(this, name) || this;
     }
-    Snake.prototype.move = function () { };
+    Snake.prototype.move = function (distanceInMeters) {
+        if (distanceInMeters === void 0) { distanceInMeters = 5; }
+        console.info('Slithering...');
+        _super.prototype.move.call(this, distanceInMeters);
+    };
     return Snake;
 }(Animal2));
+var Horse = /** @class */ (function (_super) {
+    __extends(Horse, _super);
+    function Horse(name) {
+        return _super.call(this, name) || this;
+    }
+    Horse.prototype.move = function (distanceInMeters) {
+        if (distanceInMeters === void 0) { distanceInMeters = 45; }
+        console.info('Galloping');
+        _super.prototype.move.call(this, distanceInMeters);
+    };
+    return Horse;
+}(Animal2));
+var sam = new Snake('Sammy the Python');
+var tom = new Horse('tommy the palomino');
+sam.move();
+tom.move(34);
+// 共有，私有和受保护的修饰符：默认为public，还有private， protected
+var Animal3 = /** @class */ (function () {
+    function Animal3(theName) {
+        this.name = theName;
+    }
+    /**
+     * move
+     */
+    Animal3.prototype.move = function (distanceInMeters) {
+        if (distanceInMeters === void 0) { distanceInMeters = 0; }
+        console.log(this.name + " moved " + distanceInMeters + "m.");
+    };
+    return Animal3;
+}());
+// new Animal3('Cat').age //无法访问
